@@ -69,7 +69,6 @@ class TestShoji < Test::Unit::TestCase
   should "autodetect: load all rows" do
     rows = Shoji.rows("#{FILEPATH}/testxls.data")
     assert_equal 2, rows.size
-    puts rows[0][3]
     assert_equal [Date.parse('2009/2/1'), Date.parse('1998/2/1'),
     Date.parse('2008/3/1'), DateTime.parse('1899/12/30 14:30')], rows[0]
     rows = Shoji.rows("#{FILEPATH}/testcsv.data")
