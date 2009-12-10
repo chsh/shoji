@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{shoji}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["CHIKURA Shinsaku"]
@@ -23,17 +23,11 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "javalib/poi-3.5-FINAL-20090928.jar",
-     "javalib/poi-contrib-3.5-FINAL-20090928.jar",
-     "javalib/poi-ooxml-3.5-FINAL-20090928.jar",
      "lib/shoji.rb",
      "lib/shoji/base.rb",
      "lib/shoji/csv.rb",
      "lib/shoji/excel.rb",
-     "lib/shoji/excel/poi/cell_regulator.rb",
-     "lib/shoji/excel/poi/reader.rb",
-     "lib/shoji/excel/poi/workbook_stream.rb",
-     "lib/shoji/java_loader.rb",
+     "lib/shoji/excel/reader.rb",
      "lib/shoji/text_base.rb",
      "lib/shoji/tsv.rb",
      "lib/shoji/utf8_file.rb",
