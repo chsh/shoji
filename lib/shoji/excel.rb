@@ -1,22 +1,20 @@
 # Shoji
 
-require 'shoji/base'
+require 'spreadsheet'
 
+require 'shoji/base'
 class Shoji::Excel < Shoji::Base
 
-  require 'shoji/excel/poi/cell_regulator'
-  require 'shoji/excel/poi/workbook_stream'
-  require 'shoji/excel/poi/reader'
-  
-  READER = Shoji::Excel::POI::Reader
-  WORKBOOK_STREAM = Shoji::Excel::POI::WorkbookStream
+  require 'shoji/excel/reader'
+
+  READER = Shoji::Excel::Reader
 
   def self.foreach(filename, opts = {}, &block)
     raise 'Block must be exist.' unless block_given?
     READER.new(filename).foreach(opts, &block)
   end
   def self.valid_file?(filename)
-    WORKBOOK_STREAM.valid_file? filename
+    READER.valid_file? filename
   end
 
   def self.rows(filename, opts = {})
@@ -62,6 +60,12 @@ class Shoji::Excel < Shoji::Base
   end
 
   private
+  def self.process_rows(sheet, &block)
+    sheet.each do |row|
+      cells = cells_from_row(row)
+      block.call(cells)
+    end
+  end
   def self.make_hash(header_columns, row_columns)
     h = {}
     header_columns.size.times do |i|

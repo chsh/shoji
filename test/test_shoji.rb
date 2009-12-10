@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'helper'
 
 FILEPATH = File.dirname(__FILE__) + "/files"
@@ -5,20 +6,20 @@ FILEPATH = File.dirname(__FILE__) + "/files"
 class TestShoji < Test::Unit::TestCase
 
   should "excel: load all rows" do
-    reader = Shoji::Excel::POI::Reader.new("#{FILEPATH}/test01.xls")
+    reader = Shoji::Excel::Reader.new("#{FILEPATH}/test01.xls")
     rows = reader.rows
     assert_equal [Date.parse('2009/2/1'), Date.parse('1998/2/1'),
-    Date.parse('2008/3/1'), nil], rows[0]
+    Date.parse('2008/3/1'), DateTime.parse('1899/12/30 14:30')], rows[0]
     assert_equal ["アルファ", "alpha", 300, 123.456], rows[1]
   end
-  
+
   should "excel: process foreach row" do
-    reader = Shoji::Excel::POI::Reader.new("#{FILEPATH}/test01.xls")
+    reader = Shoji::Excel::Reader.new("#{FILEPATH}/test01.xls")
     first = true
     reader.foreach do |cells|
       if first
         assert_equal [Date.parse('2009/2/1'), Date.parse('1998/2/1'),
-        Date.parse('2008/3/1'), nil], cells
+        Date.parse('2008/3/1'), DateTime.parse('1899/12/30 14:30')], cells
         first = false
         next
       end
@@ -68,13 +69,15 @@ class TestShoji < Test::Unit::TestCase
   should "autodetect: load all rows" do
     rows = Shoji.rows("#{FILEPATH}/testxls.data")
     assert_equal 2, rows.size
+    puts rows[0][3]
     assert_equal [Date.parse('2009/2/1'), Date.parse('1998/2/1'),
-    Date.parse('2008/3/1'), nil], rows[0]
+    Date.parse('2008/3/1'), DateTime.parse('1899/12/30 14:30')], rows[0]
     rows = Shoji.rows("#{FILEPATH}/testcsv.data")
     assert_equal 2, rows.size
     assert_equal ['いろは', 'abc', 'ほへと'], rows[0]
     rows = Shoji.rows("#{FILEPATH}/testtsv.data")
     assert_equal 2, rows.size
     assert_equal ['いろは', 'abc', 'ほへと'], rows[0]
+
   end
 end
