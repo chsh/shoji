@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
      "lib/shoji/tsv.rb",
      "lib/shoji/utf8_file.rb",
      "lib/shoji_main.rb",
+     "shoji.gemspec",
      "test/files/test01.csv",
      "test/files/test01.tsv",
      "test/files/test01.xls",
