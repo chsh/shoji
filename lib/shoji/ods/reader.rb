@@ -76,6 +76,7 @@ class Shoji::ODS::Reader
         index = index + 1
       end
     end
+    cols = regulate_trailing_blank_cols(cols)
     rowreps.times do |num|
       if has_value
         block.call(cols)
@@ -94,6 +95,7 @@ class Shoji::ODS::Reader
     else cell.text
     end
   end
+
   def read_from_zip_content_xml(filename, verify_only = false)
     raise "File:#{filename} doesn't exist." unless File.exist? filename
     docbytes = nil
@@ -103,4 +105,12 @@ class Shoji::ODS::Reader
     end
     docbytes
   end
+
+  def regulate_trailing_blank_cols(cols)
+    while cols.size > 0 && (cols[cols.size-1] == nil || cols[cols.size-1] == '')
+      cols.pop
+    end
+    cols
+  end
+
 end
