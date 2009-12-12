@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{shoji}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["CHIKURA Shinsaku"]
-  s.date = %q{2009-12-10}
+  s.date = %q{2009-12-12}
   s.description = %q{Shoji is a library for reading multiple format of table files.}
   s.email = %q{chsh@thinq.jp}
   s.extra_rdoc_files = [
@@ -28,12 +28,15 @@ Gem::Specification.new do |s|
      "lib/shoji/csv.rb",
      "lib/shoji/excel.rb",
      "lib/shoji/excel/reader.rb",
+     "lib/shoji/ods.rb",
+     "lib/shoji/ods/reader.rb",
      "lib/shoji/text_base.rb",
      "lib/shoji/tsv.rb",
      "lib/shoji/utf8_file.rb",
      "lib/shoji_main.rb",
      "shoji.gemspec",
      "test/files/test01.csv",
+     "test/files/test01.ods",
      "test/files/test01.tsv",
      "test/files/test01.xls",
      "test/files/testcsv.data",
