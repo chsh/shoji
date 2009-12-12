@@ -6,6 +6,7 @@ class Shoji; end
 require 'shoji/excel'
 require 'shoji/csv'
 require 'shoji/tsv'
+require 'shoji/ods'
 
 class Shoji
   EXT2CLASS = {
@@ -40,7 +41,7 @@ EOL
   def valid_content?(opts = {})
     self.class.valid_content?(@filename, opts)
   end
-  
+
   def row_size(opts = {})
     self.class.row_size(@filename, opts)
   end

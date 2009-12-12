@@ -27,6 +27,13 @@ class TestShoji < Test::Unit::TestCase
     end
   end
 
+  should "openoffice calc: load all rows" do
+    reader = Shoji::ODS::Reader.new("#{FILEPATH}/test01.ods")
+    rows = reader.rows
+    assert_equal [123, "abc", Date.parse('2009/12/13'), 'あいう'], rows[0]
+    assert_equal ["13:40", 35.22, '#ab', 'çons'], rows[1]
+  end
+
   should "csv: load all rows" do
     rows = Shoji::CSV.rows("#{FILEPATH}/test01.csv")
     assert_equal 2, rows.size
