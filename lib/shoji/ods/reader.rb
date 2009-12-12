@@ -66,7 +66,7 @@ class Shoji::ODS::Reader
       else
         cols[index] = ''
       end
-      colreps = cell['table:number-columns-repeated']
+      colreps = cell['number-columns-repeated']
       if colreps
         colreps.to_i.times do |num|
           cols[index + num] = cols[index]
