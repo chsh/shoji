@@ -34,6 +34,13 @@ class TestShoji < Test::Unit::TestCase
     assert_equal ["13:40", 35.22, '#ab', 'çons'], rows[1]
   end
 
+  should "openoffice calc: can handle repeated cells correctly." do
+    reader = Shoji::ODS::Reader.new("#{FILEPATH}/test-reps.ods")
+    rows = reader.rows
+    assert_equal [Date.parse('2009/12/6'), '', '', 3, 5, 1], rows[1]
+    assert_equal [98, 5, 5, 5, 1, 1, 2, 3], rows[2]
+  end
+
   should "csv: load all rows" do
     rows = Shoji::CSV.rows("#{FILEPATH}/test01.csv")
     assert_equal 2, rows.size
