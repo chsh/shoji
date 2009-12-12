@@ -51,3 +51,16 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+namespace :thinq do
+  desc "Publish gem to ThinQ private gem server."
+  task :publish do
+    version = File.read('VERSION').chomp
+    gem_file = "shoji-#{version}.gem"
+    gem_path = "pkg/#{gem_file}"
+    raise "gem doesn't exist." unless File.exist? gem_path
+    `scp #{gem_path} gems.thinq.jp:`
+    `ssh gems.thinq.jp '/opt/ruby/current/bin/gem install #{gem_file}; rm #{gem_file}'`
+  end
+end
+
