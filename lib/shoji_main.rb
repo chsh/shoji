@@ -12,7 +12,8 @@ class Shoji
   EXT2CLASS = {
     '.XLS' => Shoji::Excel,
     '.CSV' => Shoji::CSV,
-    '.TSV' => Shoji::TSV
+    '.TSV' => Shoji::TSV,
+    '.ODS' => Shoji::ODS
   }
   class_eval do
     [:foreach, :foreach_hash, :valid_file?, :valid_content?, :rows, :row_size].each do |meth|
