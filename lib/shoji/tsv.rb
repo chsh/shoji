@@ -1,4 +1,6 @@
 
+require 'shoji/text_base'
+
 class Shoji::TSV < Shoji::TextBase
   def self.valid_file?(filename)
     has_char? filename, "\t"

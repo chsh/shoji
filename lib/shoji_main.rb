@@ -1,20 +1,14 @@
 
 # meta class of excel, ods, csv and tsv processor.
 
-class Shoji; end
-
-require 'shoji/excel'
-require 'shoji/csv'
-require 'shoji/tsv'
-require 'shoji/ods'
 
 class Shoji
-  EXT2CLASS = {
-    '.XLS' => Shoji::Excel,
-    '.CSV' => Shoji::CSV,
-    '.TSV' => Shoji::TSV,
-    '.ODS' => Shoji::ODS
-  }
+
+  autoload :Excel, 'shoji/excel'
+  autoload :CSV, 'shoji/csv'
+  autoload :TSV, 'shoji/tsv'
+  autoload :ODS, 'shoji/ods'
+
   class_eval do
     [:foreach, :foreach_hash, :valid_file?, :valid_content?, :rows, :row_size].each do |meth|
       eval <<EOL
@@ -57,7 +51,16 @@ EOL
     detect_class_from_content(filename)
   end
   def self.detect_class_from_filename(filename)
-    EXT2CLASS[File.extname(filename).upcase]
+    @@ext2class ||= build_ext2class
+    @@ext2class[File.extname(filename).upcase]
+  end
+  def self.build_ext2class
+    {
+      '.XLS' => Shoji::Excel,
+      '.CSV' => Shoji::CSV,
+      '.TSV' => Shoji::TSV,
+      '.ODS' => Shoji::ODS
+    }
   end
   def self.detect_class_from_content(filename)
     if binary_file? filename
