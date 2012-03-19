@@ -1,6 +1,4 @@
 
-require 'fastercsv'
-
 require 'shoji/base'
 require 'shoji/utf8_file'
 
@@ -15,7 +13,7 @@ class Shoji::TextBase < Shoji::Base
     Shoji::UTF8File.convert filename do |path|
       limit = opts[:limit].to_i
       index = 0
-      FasterCSV.foreach(path, fastercsv_opts) do |row|
+      CSV.foreach(path, fastercsv_opts) do |row|
         block.call(row)
         index += 1
         break if (limit > 0 && limit <= index)
@@ -36,7 +34,7 @@ class Shoji::TextBase < Shoji::Base
   def self.row_size(filename, opts = {})
     enc = ENCMAP[Shoji::UTF8File.guess_encoding(filename)]
     index = 0
-    FasterCSV.foreach(filename, fastercsv_opts.merge({:encoding => enc})) do |row|
+    CSV.foreach(filename, fastercsv_opts.merge({:encoding => enc})) do |row|
       index += 1
     end
     index

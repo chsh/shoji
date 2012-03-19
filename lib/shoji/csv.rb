@@ -1,6 +1,4 @@
 
-require 'fastercsv'
-
 require 'shoji/text_base'
 
 class Shoji::CSV < Shoji::TextBase
