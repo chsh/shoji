@@ -1,7 +1,6 @@
 require 'tempfile'
 require 'nkf'
-require 'iconv'
- 
+
 class Shoji::UTF8File
   def self.convert(filename, &block)
     encoding = guess_encoding(filename)
@@ -42,7 +41,7 @@ class Shoji::UTF8File
   private
   NKF2ICONV = {
     NKF::UTF8 => 'UTF-8',
-    NKF::SJIS => 'SHIFT-JIS',
+    NKF::SJIS => 'SJIS',
     NKF::EUC => 'EUC-JP',
     NKF::JIS => 'ISO-2022-JP',
     NKF::ASCII => 'UTF-8'
@@ -50,25 +49,25 @@ class Shoji::UTF8File
   def self.winfile?(filename)
     line = read_lines(filename, 1)
     if line =~ /\r\n$/
-      true 
+      true
     else
       false
     end
   end
   def self.make_instance(filename, encoding)
     return new(filename, :filename) if encoding == 'UTF-8'
-    if winfile?(filename) && encoding == 'SHIFT-JIS'
+    if winfile?(filename) && encoding == 'SJIS'
       encoding = 'CP932'
     end
     tf = Tempfile.new('file-path')
-    tf.write Iconv.conv('UTF-8', encoding, File.read(filename))
+    tf.write File.open(filename, "r:#{encoding}:UTF-8").read
     tf.close
     new(tf, :tempfile)
   end
   def self.read_lines(filename, max = 1)
     lines = []
     index = 0
-    File.foreach(filename) do |line|
+    File.foreach(filename, encoding: 'BINARY') do |line|
       lines << line
       index += 1
       break if index >= max

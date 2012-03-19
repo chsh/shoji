@@ -1,5 +1,4 @@
-
-require 'zip/zipfilesystem'
+require 'zipruby'
 require 'nokogiri'
 
 class Shoji::ODS::Reader
@@ -99,9 +98,13 @@ class Shoji::ODS::Reader
   def read_from_zip_content_xml(filename, verify_only = false)
     raise "File:#{filename} doesn't exist." unless File.exist? filename
     docbytes = nil
-    Zip::ZipFile.open(filename) do |zipfile|
-      raise "content.xml doesn't exist in #{filename}." unless zipfile.find_entry('content.xml')
-      docbytes = zipfile.read('content.xml') unless verify_only
+    Zip::Archive.open(filename) do |ar|
+      raise "content.xml doesn't exist in #{filename}" unless ar.get_stat 'content.xml' # raise unless exist.
+      unless verify_only
+        f = ar.fopen('content.xml')
+        docbytes = f.read
+        f.close
+      end
     end
     docbytes
   end

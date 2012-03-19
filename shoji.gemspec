@@ -4,21 +4,24 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{shoji}
-  s.version = "0.0.7"
+  s.name = "shoji"
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["CHIKURA Shinsaku"]
-  s.date = %q{2011-03-22}
-  s.description = %q{Shoji is a library for reading multiple format of table files.}
-  s.email = %q{chsh@thinq.jp}
+  s.date = "2012-03-19"
+  s.description = "Shoji is a package of reading various formats of table structured data file."
+  s.email = "shinsaku@chikura.me"
   s.extra_rdoc_files = [
-    "LICENSE",
+    "LICENSE.txt",
     "README.rdoc"
   ]
   s.files = [
     ".document",
-    "LICENSE",
+    ".rvmrc",
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
@@ -45,27 +48,40 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_shoji.rb"
   ]
+  s.homepage = "http://github.com/chsh/shoji"
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Shoji is a library for reading multiple format of table files.}
-  s.test_files = [
-    "test/helper.rb",
-    "test/test_shoji.rb"
-  ]
+  s.rubygems_version = "1.8.10"
+  s.summary = "Shoji is a package of reading various formats of table structured data file."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<zipruby>, [">= 0"])
+      s.add_runtime_dependency(%q<spreadsheet>, [">= 0"])
+      s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_runtime_dependency(%q<rubyzip>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
     else
+      s.add_dependency(%q<zipruby>, [">= 0"])
+      s.add_dependency(%q<spreadsheet>, [">= 0"])
+      s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<rubyzip>, [">= 0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
     end
   else
+    s.add_dependency(%q<zipruby>, [">= 0"])
+    s.add_dependency(%q<spreadsheet>, [">= 0"])
+    s.add_dependency(%q<nokogiri>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<rubyzip>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
   end
 end
 

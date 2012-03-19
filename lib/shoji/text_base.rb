@@ -1,4 +1,4 @@
-
+require 'csv'
 require 'shoji/base'
 require 'shoji/utf8_file'
 

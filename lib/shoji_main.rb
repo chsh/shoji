@@ -96,7 +96,7 @@ EOL
   end
   def self.first_line(filename)
     line = nil
-    File.foreach(filename) do |l|
+    File.foreach(filename, encoding: 'BINARY') do |l|
       line = l
       break
     end
